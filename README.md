@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# SKÅDIS DXF Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Generate custom-sized IKEA SKÅDIS-compatible pegboard DXF files for laser cutting or CNC, with a live preview and locked hole pattern for perfect accessory fit.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## React Compiler
+**Cloudflare Pages:** [skadis-dxf.pages.dev](https://skadis-dxf.pages.dev/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **SKÅDIS-compatible:** Hole size, spacing, and offsets are locked to IKEA SKÅDIS spec so all official accessories fit.
+- **Parametric sizing:** Choose any board width, height, and corner radius.
+- **Instant preview:** See your board and hole pattern before exporting.
+- **DXF export:** Download a ready-to-cut DXF file for laser/CNC.
+- **Modern UI:** Clean, responsive, and easy to use.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## CNC Operator Solution (Preferred)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+When cutting holes, the CNC operator should use an **outside** or **pocket** toolpath for the holes, not **on the line**. This tells the CNC to offset the toolpath outward by the radius of the bit, so the final hole matches the intended size.
+
+---
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Deploying to Cloudflare Pages (with Wrangler)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Build the site
+npm run build
+
+# Deploy to Cloudflare Pages
+wrangler pages deploy dist --project-name=skadis-dxf
 ```
+
+---
+
+## License
+
+MIT
